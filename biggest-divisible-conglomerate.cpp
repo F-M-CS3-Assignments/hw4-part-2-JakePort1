@@ -14,6 +14,55 @@
 using namespace std; 
 
 
+/*
+Explanation: 
+
+I start by sorting the input in ascending order and creating a vector of venter<int>s (called DP) to store my dynamic results. 
+
+I then deal with the base case––in tthis case the smallest number, so input[0]–––and push back a vector with just the smallest element in it. 
+
+Then, the code moves to the next smallest vector, and detirmines if any of the element of the list that are smaller than it are also divisors of
+the element. If so, it will save the element(s), check DP to see which one has the largest conglomerate (because they are smaller, they will already have
+been calculated), and combined the current element with the DP[index] such that the length of the sum is greatest. 
+
+The code then repeats this process until the largest int is reached. 
+
+Example: --------------------------------------------------------------------------------
+
+[28, 22, 7, 2, 8, 14, 24, 56] -> [2, 7, 8, 14, 22, 24, 28, 56]
+
+2 is base case: DP becomes 
+   DP =  { {2} }
+
+Move on to 7: (seven has no lower divisors): 
+   DP =  { {2}, {7} }
+
+
+Move onto 8: 
+   DP = { {2}, {7}, {8} }
+
+Move onto 14. 7 Divides 14, code will reference index 2 which calculate conglomerate of 7: 
+    DP = { {2}, {7}, {8}, {14,7} }
+
+Move onto 22: 
+    DP = { {2}, {7}, {8}, {14,7}, {22} }
+
+Move onto 24: 
+    DP = { {2}, {7}, {8}, {14,7}, {22, 2}, {24, 8, 2} }
+
+Move onto 28 (24 will reference the conglomerate from 14 at index 3 ): 
+
+    DP = { {2}, {7}, {8}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  }
+            0    1    2     3         4        5           6
+
+Move onto 56––code will reference 28 at DP[6]: 
+
+    DP = { {2}, {7}, {8}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  {56, 28, 14, 7} }
+            0    1    2     3         4        5           6               7
+
+
+*/
+
 vector<int> combine(vector<int> left, vector<int> right){
     vector<int> combined; 
 
@@ -92,11 +141,6 @@ vector<int> bdc(vector<int> input){
         }
     }
 
-
-    for(vector<int> v : DP){
-        cout<< vec_to_string(v) << endl; 
-    }
-
     //find the largest conglomerate in DP: -------------------
 
     int currVecSize = 0;
@@ -122,6 +166,7 @@ vector<int> bdc(vector<int> input){
     //--------------------------------------------------------
 
 }
+
 
 
 
