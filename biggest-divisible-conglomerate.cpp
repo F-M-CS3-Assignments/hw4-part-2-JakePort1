@@ -15,7 +15,7 @@ using namespace std;
 
 
 /*
-Explanation: 
+-------------------------------------Explanation----------------------------------------
 
 I start by sorting the input in ascending order and creating a vector of venter<int>s (called DP) to store my dynamic results. 
 
@@ -25,9 +25,20 @@ Then, the code moves to the next smallest vector, and detirmines if any of the e
 the element. If so, it will save the element(s), check DP to see which one has the largest conglomerate (because they are smaller, they will already have
 been calculated), and combined the current element with the DP[index] such that the length of the sum is greatest. 
 
-The code then repeats this process until the largest int is reached. 
+The code then repeats this process until the largest int is reached. (Example Below)
 
-Example: --------------------------------------------------------------------------------
+-----------------------------------Time Complexity--------------------------------------
+The time complexity of this Dynamic Approach is O(N ),
+
+
+here N is the input size, because it will only need to process each 
+element one time. 
+
+In the previous recursive problem, the time complexity would be O(2^N), because each recursive call would output many more recursive calls
+which would do computations that have already been computed.
+
+
+--------------------------------------Example: -----------------------------------------
 
 [28, 22, 7, 2, 8, 14, 24, 56] -> [2, 7, 8, 14, 22, 24, 28, 56]
 
@@ -57,7 +68,7 @@ Move onto 28 (24 will reference the conglomerate from 14 at index 3 ):
 
 Move onto 56––code will reference 28 at DP[6]: 
 
-    DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  {56, 28, 14, 7} }
+    DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  {56, 28, 14, 7]} }
             0    1      2       3       4        5           6               7
 
 
