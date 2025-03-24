@@ -1,0 +1,137 @@
+// Jacob Port 
+// CPS 222
+// HW Part 2 
+
+
+
+// #include "bdc.h"
+#include<iostream> 
+#include<sstream> 
+#include<vector> 
+#include<cassert> 
+#include<algorithm>
+
+using namespace std; 
+
+
+vector<int> combine(vector<int> left, vector<int> right){
+    vector<int> combined; 
+
+    for(int i = 0; i < left.size(); i++){
+        combined.push_back(left[i]);
+    }
+    for(int i = 0; i < right.size(); i++){
+        combined.push_back(right[i]);
+    }
+    return combined;
+};
+
+string vec_to_string(vector<int> v){
+    //if vector is empty output []
+    if(v.size() == 0){
+        return "[ ]";
+    }
+
+    ostringstream oSS;
+    oSS << "["; //start output here 
+
+    //iterates throug the vector an outputs the element with a comma and space 
+    for(int i = 0; i < v.size(); i++){
+        if(i < v.size()-1){
+            oSS << v.at(i) << ", ";
+        }else{
+            oSS << v.at(i) << "]"; //end output here 
+        }
+    }
+    return oSS.str(); //return the to string version of oSS
+};
+
+
+vector<int> bdc(vector<int> input){
+
+    //sort input in ascending order 
+    sort(input.begin(),input.end()); 
+
+    vector<vector<int>> DP; //creates the table that will be used for dynamic programming 
+
+    //I'm using the smallest element as the base case, because it can never have a conglomerate thats smaller than itself 
+    vector<int> baseCase = {input[0]};
+    DP.push_back(baseCase);
+
+    //iterates through the input, ignoring the base case 
+    for(size_t i = 1; i < input.size(); i++){
+
+        vector<int> divisorsIndexes; //I will store the indexes of divisors in here 
+        for(size_t j = 0; j < i; j++){ //may get issues here, check here first for debugging 
+            if(input[i] % input[j] == 0){
+                divisorsIndexes.push_back(j);
+            }
+        }
+        //if there are no divisors, I will just push back the single vector: 
+        int vecSize; //initalizes these two vars here so that I can acess them outside the scope later on...
+        int idx; 
+
+        if(divisorsIndexes.size() == 0){
+            vector<int> temp = {input[i]}; 
+            DP.push_back(temp); 
+        }else{
+            //Here I will iterate through the list of divisors, and test which one is the longest, then use that to create the larger conglomerate 
+             vecSize = 1; //sets to smallest possivle
+             idx = divisorsIndexes.at(0);  //arbitrary
+
+            for(size_t index : divisorsIndexes){
+
+                if(DP[index].size() > vecSize){
+                vecSize = DP[index].size(); 
+                idx = index;
+                }
+            }    
+            vector<int> left = {input[i]};
+            vector<int> combined = combine(left,DP[idx]);
+            DP.push_back(combined);
+        }
+    }
+
+
+    for(vector<int> v : DP){
+        cout<< vec_to_string(v) << endl; 
+    }
+
+    //find the largest conglomerate in DP: -------------------
+
+    int currVecSize = 0;
+    int currIndex = 0;
+    for(int i = 0; i < DP.size(); i++){
+        if(DP[i].size() > currVecSize){
+            currVecSize = DP[i].size();
+            currIndex = i;
+        }
+    }
+    //returns smallest or emtpy list if the vector is 1 or 0
+    if(currVecSize == 0){
+        vector<int> emptyVec = {};
+        return emptyVec;
+    }
+    if(currVecSize == 1){
+        vector<int> smallest = {input[0]};
+        return smallest;
+    }
+
+    //otherwise, returns the longest element. 
+    return DP[currIndex];
+    //--------------------------------------------------------
+
+}
+
+
+
+
+//for debugging; will remove for testing
+int main(){
+    vector<int> test = {28, 22, 7, 2, 8, 14, 24, 56}; 
+    vector<int> result = bdc(test); 
+
+    cout << vec_to_string(result); 
+
+return 0;
+}
