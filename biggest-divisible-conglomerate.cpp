@@ -39,26 +39,26 @@ Move on to 7: (seven has no lower divisors):
 
 
 Move onto 8: 
-   DP = { {2}, {7}, {8} }
+   DP = { {2}, {7}, {8, 2} }
 
 Move onto 14. 7 Divides 14, code will reference index 2 which calculate conglomerate of 7: 
-    DP = { {2}, {7}, {8}, {14,7} }
+    DP = { {2}, {7}, {8, 2}, {14,7} }
 
 Move onto 22: 
-    DP = { {2}, {7}, {8}, {14,7}, {22} }
+    DP = { {2}, {7}, {8, 2}, {14,7}, {22} }
 
 Move onto 24: 
-    DP = { {2}, {7}, {8}, {14,7}, {22, 2}, {24, 8, 2} }
+    DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2} }
 
 Move onto 28 (24 will reference the conglomerate from 14 at index 3 ): 
 
-    DP = { {2}, {7}, {8}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  }
+    DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  }
             0    1    2     3         4        5           6
 
 Move onto 56––code will reference 28 at DP[6]: 
 
-    DP = { {2}, {7}, {8}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  {56, 28, 14, 7} }
-            0    1    2     3         4        5           6               7
+    DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  {56, 28, 14, 7} }
+            0    1      2       3       4        5           6               7
 
 
 */
@@ -186,20 +186,11 @@ void test(){
     cout << vec_to_string(test4) << endl << vec_to_string(biggest_divisible_conglomerate(test4)); 
     cout << endl << endl;
 
+    vector<int> test5 = {}; 
+    cout << vec_to_string(test5) << endl << vec_to_string(biggest_divisible_conglomerate(test5)); 
+    cout << endl << endl;
+
     cout << "Testing Done. " << endl;
 
 
 }
-
-// //for debugging; will remove for testing
-// int main(){
-
-//     test();
-
-//     // vector<int> test = {28, 22, 7, 2, 8, 14, 24, 56}; 
-//     // vector<int> result = bdc(test); 
-
-//     // cout << vec_to_string(result); 
-
-// return 0;
-// }
