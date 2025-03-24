@@ -4,7 +4,7 @@
 
 
 
-// #include "bdc.h"
+#include "bdc.h"
 #include<iostream> 
 #include<sstream> 
 #include<vector> 
@@ -95,8 +95,7 @@ string vec_to_string(vector<int> v){
     return oSS.str(); //return the to string version of oSS
 };
 
-
-vector<int> bdc(vector<int> input){
+vector<int> biggest_divisible_conglomerate(vector<int> input){
 
     //sort input in ascending order 
     sort(input.begin(),input.end()); 
@@ -167,16 +166,41 @@ vector<int> bdc(vector<int> input){
 
 }
 
+void test(){
+
+    cout << "Starting Testing: " << endl; 
+
+    vector<int> test = {1, 2, 4, 8}; 
+    cout << vec_to_string(test) << endl << vec_to_string(biggest_divisible_conglomerate(test)); 
+    cout << endl << endl;
+
+    vector<int> test2 = {2, 3, 6, 9, 18}; 
+    cout << vec_to_string(test2) << endl << vec_to_string(biggest_divisible_conglomerate(test2)); 
+    cout << endl << endl;
+
+    vector<int> test3 = {7, 11, 13, 17}; 
+    cout << vec_to_string(test3) << endl << vec_to_string(biggest_divisible_conglomerate(test3)); 
+    cout << endl << endl;
+
+    vector<int> test4 = {2, 4, 6, 9, 12, 18, 20}; 
+    cout << vec_to_string(test4) << endl << vec_to_string(biggest_divisible_conglomerate(test4)); 
+    cout << endl << endl;
+
+    cout << "Testing Done. " << endl;
 
 
+}
 
-
-//for debugging; will remove for testing
+// //for debugging; will remove for testing
 int main(){
-    vector<int> test = {28, 22, 7, 2, 8, 14, 24, 56}; 
-    vector<int> result = bdc(test); 
 
-    cout << vec_to_string(result); 
+    test();
+
+
+    // vector<int> test = {28, 22, 7, 2, 8, 14, 24, 56}; 
+    // vector<int> result = bdc(test); 
+
+    // cout << vec_to_string(result); 
 
 return 0;
 }
