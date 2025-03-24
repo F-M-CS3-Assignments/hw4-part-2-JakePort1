@@ -192,15 +192,14 @@ void test(){
 }
 
 // //for debugging; will remove for testing
-int main(){
+// int main(){
 
-    test();
+//     test();
 
+//     // vector<int> test = {28, 22, 7, 2, 8, 14, 24, 56}; 
+//     // vector<int> result = bdc(test); 
 
-    // vector<int> test = {28, 22, 7, 2, 8, 14, 24, 56}; 
-    // vector<int> result = bdc(test); 
+//     // cout << vec_to_string(result); 
 
-    // cout << vec_to_string(result); 
-
-return 0;
-}
+// return 0;
+// }
