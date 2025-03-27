@@ -2,8 +2,6 @@
 // CPS 222
 // HW Part 2 
 
-
-
 #include "bdc.h"
 #include<iostream> 
 #include<sstream> 
@@ -27,16 +25,17 @@ been calculated), and combined the current element with the DP[index] such that 
 
 The code then repeats this process until the largest int is reached. (Example Below)
 
------------------------------------Time Complexity--------------------------------------
+-----------------------------------Time Complexity-x-------------------------------------
 The time complexity of this Dynamic Approach is O(N ),
 
+
+wouild it be N^2 * c?? 
 
 here N is the input size, because it will only need to process each 
 element one time. 
 
 In the previous recursive problem, the time complexity would be O(2^N), because each recursive call would output many more recursive calls
 which would do computations that have already been computed.
-
 
 --------------------------------------Example: -----------------------------------------
 
@@ -48,7 +47,6 @@ which would do computations that have already been computed.
 Move on to 7: (seven has no lower divisors): 
    DP =  { {2}, {7} }
 
-
 Move onto 8: 
    DP = { {2}, {7}, {8, 2} }
 
@@ -56,7 +54,7 @@ Move onto 14. 7 Divides 14, code will reference index 2 which calculate conglome
     DP = { {2}, {7}, {8, 2}, {14,7} }
 
 Move onto 22: 
-    DP = { {2}, {7}, {8, 2}, {14,7}, {22} }
+    DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2} }
 
 Move onto 24: 
     DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2} }
@@ -70,7 +68,6 @@ Move onto 56––code will reference 28 at DP[6]:
 
     DP = { {2}, {7}, {8, 2}, {14,7}, {22, 2}, {24, 8, 2}, {28,14,7},  {56, 28, 14, 7]} }
             0    1      2       3       4        5           6               7
-
 
 */
 
@@ -178,6 +175,7 @@ vector<int> biggest_divisible_conglomerate(vector<int> input){
 }
 
 void test(){
+    //was called in int main() but I removed main from this file to test with the main.cpp
 
     cout << "Starting Testing: " << endl; 
 
