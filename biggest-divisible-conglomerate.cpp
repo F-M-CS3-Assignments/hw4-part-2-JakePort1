@@ -26,16 +26,11 @@ been calculated), and combined the current element with the DP[index] such that 
 The code then repeats this process until the largest int is reached. (Example Below)
 
 -----------------------------------Time Complexity-x-------------------------------------
-The time complexity of this Dynamic Approach is O(N ),
+The time complexity of this Dynamic Approach is O(n) at worst, because it will only need to do max one calculation for each 
+element in the list. It will never have to do repeat calculations. 
 
-
-wouild it be N^2 * c?? 
-
-here N is the input size, because it will only need to process each 
-element one time. 
-
-In the previous recursive problem, the time complexity would be O(2^N), because each recursive call would output many more recursive calls
-which would do computations that have already been computed.
+In the previous recursive problem, the time complexity would be O(2^n), because each recursive call would output two more recursive calls
+which would do computations that have already been computed, which at worst, will go for the entire length fo the list which is size n. 
 
 --------------------------------------Example: -----------------------------------------
 

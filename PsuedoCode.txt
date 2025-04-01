@@ -1,0 +1,68 @@
+
+
+
+
+
+
+
+Pseudo Code for dynamic approach: 
+
+1. Sort the list in asending order
+
+First need to create a 2d array 
+    The rows will be the 
+
+
+
+
+
+
+get input,
+
+sort input
+
+create vector<vector<int>> DP; 
+
+//base case: 
+vector<int> baseCase = {input[0]}
+DP.pushback(baseCase)
+
+from( i = 1 to i = input.end()){
+
+    vector<int> divsorsIndex;
+    for(j = 0 to j < i){
+        if (an input[j] is a divosr of input[i])
+            push back to divosrsIndex
+    }
+
+    if divisorsIndex is empty: 
+        pushBack {input[i]} to DP
+
+    if divisorsIndex is !empty{
+
+
+        int IDXsize = 1;
+        int idx = divisorsIndex.at(0);  
+
+
+        //finds the divisors that it itself has the longest conglomerate 
+        for(int index in divisorsIndex): 
+            if(DP[index].size() > IDXsize):
+                IDXsize = DP[index].size; 
+                idx = index; 
+
+
+        combine {input[i]} + DP[index];
+
+        DP.pushback(combined)
+
+
+
+
+    }
+
+    find divisors of i:
+
+
+
+}
